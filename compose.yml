@@ -1,0 +1,181 @@
+name: ${APP_NAME_HOST}
+
+networks:
+  internal:
+    name: ${APP_NAME_HOST}_internal
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
+volumes:
+  habitat-config:
+  grafana-data:
+  grafana-provisioning:
+  telegraf-config:
+
+
+secrets:
+  GRAFANA_OAUTH_CLIENT_ID:
+    file: ${SECRETS_DIR}/GRAFANA_OAUTH_CLIENT_ID
+  GRAFANA_OAUTH_CLIENT_SECRET:
+    file: ${SECRETS_DIR}/GRAFANA_OAUTH_CLIENT_SECRET
+  INFLUXDB_ADMIN_TOKEN:
+    file: ${SECRETS_DIR}/INFLUXDB_ADMIN_TOKEN
+
+services:
+
+  habitat-config-vigil:
+    image: tschebbischeff/habitat-config:latest
+    container_name: ${APP_NAME_HOST}_habitat-config-vigil
+    restart: no
+    env_file:
+      - ./.env
+      - path: ${ENV_DIR}/.env
+        required: false
+      - path: ${ENV_DIR}/habitat-config.env
+        required: false
+    environment:
+      MODULE_NAME: "vigil"
+    networks:
+      internal:
+    volumes:
+      - habitat-config:/habitat-config/orchestration
+      - ./habitat-config:/habitat-config/source:ro
+      - grafana-provisioning:/habitat-config/target/grafana
+      - telegraf-config:/habitat-config/target/telegraf
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ${APP_NAME_HOST}_grafana
+    restart: always
+    expose:
+      - "3000"
+    user: "root"
+    env_file:
+      - ./.env
+      - path: ${ENV_DIR}/.env
+        required: false
+      - path: ${ENV_DIR}/grafana.env
+        required: false
+    environment:
+      GF_SERVER_ROOT_URL: "https://grafana.${APP_HOST}"
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
+      GF_SECURITY_COOKIE_SECURE: "true"
+      GF_SECURITY_COOKIE_SAMESITE: "lax"
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_GENERIC_OAUTH_NAME: "Authelia"
+      GF_AUTH_GENERIC_OAUTH_ICON: "signin"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID__FILE: "/run/secrets/GRAFANA_OAUTH_CLIENT_ID"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET__FILE: "/run/secrets/GRAFANA_OAUTH_CLIENT_SECRET"
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email groups"
+      GF_AUTH_GENERIC_OAUTH_EMPTY_SCOPES: "false"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://authelia.${APP_HOST}/api/oidc/authorization"
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://authelia.${APP_HOST}/api/oidc/token"
+      GF_AUTH_GENERIC_OAUTH_API_URL: "https://authelia.${APP_HOST}/api/oidc/userinfo"
+      GF_AUTH_GENERIC_OAUTH_LOGIN_ATTRIBUTE_PATH: ""
+      GF_AUTH_GENERIC_OAUTH_GROUPS_ATTRIBUTE_PATH: "groups"
+      GF_AUTH_GENERIC_OAUTH_NAME_ATTRIBUTE_PATH: "name"
+      GF_AUTH_GENERIC_OAUTH_USE_PKCE: "true"
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(groups[*], 'admins') && 'GrafanaAdmin' || contains(groups[*], 'grafana_admins') && 'Admin' || contains(groups[*], 'grafana_editors') && 'Editor' || 'Viewer'"
+      GF_AUTH_GENERIC_OAUTH_AUTH_STYLE: "InHeader"
+      GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP: "true"
+      GF_AUTH_GENERIC_OAUTH_AUTO_LOGIN: "true"
+      GF_AUTH_GENERIC_OAUTH_ALLOW_ASSIGN_GRAFANA_ADMIN: "true"
+      GF_AUTH_GENERIC_OAUTH_SIGNOUT_REDIRECT_URL: "https://authelia.${APP_HOST}/logout?rd=https%3A%2F%2Fgrafana.${APP_HOST}%2F"
+      GF_PROVISIONING_INFLUXDB_TOKEN__FILE: "/run/secrets/INFLUXDB_ADMIN_TOKEN"
+      GF_NEWS_NEWS_FEED_ENABLED: "false"
+    secrets:
+      - GRAFANA_OAUTH_CLIENT_ID
+      - GRAFANA_OAUTH_CLIENT_SECRET
+      - INFLUXDB_ADMIN_TOKEN
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - grafana-provisioning:/etc/grafana/provisioning:ro
+    networks:
+      internal:
+    extra_hosts:
+      - "grafana.com:0.0.0.0"
+      - "stats.grafana.com:0.0.0.0"
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://127.0.0.1:3000/api/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    depends_on:
+      habitat-config-vigil:
+        condition: service_completed_successfully
+
+  telegraf:
+    build:
+      context: ./telegraf
+    container_name: ${APP_NAME_HOST}_telegraf
+    restart: always
+    user: "root"
+    env_file:
+      - ./.env
+      - path: ${ENV_DIR}/.env
+        required: false
+      - path: ${ENV_DIR}/telegraf.env
+        required: false
+    environment:
+      HOST_PROC: '/hostfs/proc'
+      HOST_SYS: '/hostfs/sys'
+      HOST_ETC: '/hostfs/etc'
+      HOST_VAR: '/hostfs/var'
+      HOST_RUN: '/hostfs/run'
+      HOST_DEV: '/hostfs/dev'
+      HOST_MOUNT_PREFIX: '/hostfs'
+      HOST_ROOT: '/hostfs'
+    secrets:
+      - INFLUXDB_ADMIN_TOKEN
+    volumes:
+      - telegraf-config:/etc/telegraf/config:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      # - /etc:/hostfs/etc:ro
+      - /var:/hostfs/var:ro
+      # - /run:/hostfs/run:ro
+      - /run/udev:/hostfs/run/udev:ro
+      - /dev:/hostfs/dev:ro
+      - /etc/os-release:/hostfs/etc/os-release:ro
+    networks:
+      internal:
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://127.0.0.1:8080/health" ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    depends_on:
+      socket-proxy:
+        condition: service_healthy
+      habitat-config-vigil:
+        condition: service_completed_successfully
+
+  socket-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:master
+    container_name: ${APP_NAME_HOST}_socket-proxy
+    restart: always
+    user: "root"
+    env_file:
+      - ./.env
+      - path: ${ENV_DIR}/.env
+        required: false
+      - path: ${ENV_DIR}/socket-proxy.env
+        required: false
+    environment:
+      CONTAINERS: "1"
+      INFO: "1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      internal:
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "127.0.0.1", "2375" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
