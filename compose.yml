@@ -48,7 +48,7 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: ${APP_NAME_HOST}_grafana
-    restart: always
+    restart: unless-stopped
     expose:
       - "3000"
     user: "root"
@@ -112,7 +112,7 @@ services:
     build:
       context: ./telegraf
     container_name: ${APP_NAME_HOST}_telegraf
-    restart: always
+    restart: unless-stopped
     user: "root"
     env_file:
       - ./.env
@@ -158,7 +158,7 @@ services:
   socket-proxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:master
     container_name: ${APP_NAME_HOST}_socket-proxy
-    restart: always
+    restart: unless-stopped
     user: "root"
     env_file:
       - ./.env
