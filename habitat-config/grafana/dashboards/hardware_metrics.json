@@ -2208,14 +2208,14 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  \"time_bin\" AS \"time\",\n  \"total_containers\"\nFROM\n  (\n    SELECT\n      date_bin(COALESCE($interval,'$__interval_ms milliseconds')::INTERVAL, \"time\") AS \"time_bin\",\n      AVG(\"n_containers\") AS \"total_containers\",\n    FROM\n      \"docker\"\n    WHERE\n      \"time\" >= $__timeFrom\n      AND \"time\" <= $__timeTo\n    GROUP BY\n      \"time_bin\"\n  )\nORDER BY\n  \"time\" ASC",
+          "rawSql": "SELECT\n  \"time_bin\" AS \"time\",\n  \"total_containers\"\nFROM\n  (\n    SELECT\n      date_bin(COALESCE($interval,'$__interval_ms milliseconds')::INTERVAL, \"time\") AS \"time_bin\",\n      AVG(\"n_containers_running\") AS \"total_containers\",\n    FROM\n      \"docker\"\n    WHERE\n      \"time\" >= $__timeFrom\n      AND \"time\" <= $__timeTo\n    GROUP BY\n      \"time_bin\"\n  )\nORDER BY\n  \"time\" ASC",
           "refId": "T",
           "sql": {
             "columns": [
               {
                 "parameters": [
                   {
-                    "name": "n_containers",
+                    "name": "n_containers_running",
                     "type": "functionParameter"
                   }
                 ],
