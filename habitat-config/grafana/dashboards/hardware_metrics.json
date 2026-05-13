@@ -5,8 +5,8 @@
     "name": "hardware-metrics",
     "namespace": "default",
     "uid": "9da5fe0a-fad3-451e-8b37-0e398675601c",
-    "resourceVersion": "1778676749019008",
-    "generation": 3,
+    "resourceVersion": "1778678026882003",
+    "generation": 4,
     "creationTimestamp": "2026-05-06T00:50:10Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2688993405308928"
@@ -18,11 +18,11 @@
       "grafana.app/managerAllowsEdits": "true",
       "grafana.app/managerId": "dashboards",
       "grafana.app/saved-from-ui": "Grafana v13.0.1+security-01 (9bbe672d)",
-      "grafana.app/sourceChecksum": "ad489e1c53cd64248cb5401632b0b074",
+      "grafana.app/sourceChecksum": "cae1f7a6c8bb75efc5824e3ddbc090d0",
       "grafana.app/sourcePath": "/etc/grafana/provisioning/dashboards/hardware_metrics.json",
-      "grafana.app/sourceTimestamp": "1778594813000",
+      "grafana.app/sourceTimestamp": "1778677185000",
       "grafana.app/updatedBy": "user:afl74eg0bj94we",
-      "grafana.app/updatedTimestamp": "2026-05-13T12:52:28Z"
+      "grafana.app/updatedTimestamp": "2026-05-13T13:13:46Z"
     }
   },
   "spec": {
@@ -751,6 +751,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
@@ -1272,6 +1281,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
@@ -2005,6 +2023,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
@@ -2840,6 +2867,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
@@ -3256,6 +3292,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
@@ -3780,6 +3825,15 @@
                             }
                           },
                           "fieldName": "read_derivative"
+                        },
+                        {
+                          "config": {
+                            "id": "lower",
+                            "options": {
+                              "value": 0
+                            }
+                          },
+                          "fieldName": "write_derivative"
                         }
                       ],
                       "match": "any",
