@@ -114,6 +114,7 @@ SECRETS_DIR="/run/secrets"
 | :-- | :-- | :-- |
 | `GRAFANA_OAUTH_CLIENT_ID` | Randomly generated OAuth client ID for Grafana. | [Authelia Docs: Generate Client ID](https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#client-id--identifier) |
 | `GRAFANA_OAUTH_CLIENT_SECRET` | Randomly generated OAuth client secret for Grafana. | [Authelia Docs: Generate Client Secret](https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#client-secret) |
+| `GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2` | PBKDF2 digest of `GRAFANA_OAUTH_CLIENT_SECRET`. | [Authelia Docs: Generate Client Secret](https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#client-secret) |
 | `INFLUXDB_ADMIN_TOKEN` | The token from the `token` field of the `INFLUXDB_ADMIN_TOKEN_JSON` secret. | [InfluxDB Docs](https://docs.influxdata.com/influxdb3/enterprise/admin/tokens/admin/preconfigured/) |
 
 ### Run the Application

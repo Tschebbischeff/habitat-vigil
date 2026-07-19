@@ -20,6 +20,8 @@ secrets:
     file: ${SECRETS_DIR}/GRAFANA_OAUTH_CLIENT_ID
   GRAFANA_OAUTH_CLIENT_SECRET:
     file: ${SECRETS_DIR}/GRAFANA_OAUTH_CLIENT_SECRET
+  GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2:
+    file: ${SECRETS_DIR}/GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2
   INFLUXDB_ADMIN_TOKEN:
     file: ${SECRETS_DIR}/INFLUXDB_ADMIN_TOKEN
 
@@ -37,6 +39,9 @@ services:
         required: false
     environment:
       MODULE_NAME: "vigil"
+    secrets:
+      - GRAFANA_OAUTH_CLIENT_ID
+      - GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2
     networks:
       internal:
     volumes:
