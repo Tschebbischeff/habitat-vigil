@@ -7,7 +7,7 @@ identity_providers:
       - client_id: '${GRAFANA_OAUTH_CLIENT_ID}' # docker run --rm authelia/authelia:latest authelia crypto rand --length 72 --charset rfc3986
         claims_policy: 'grafana'
         client_name: 'Grafana'
-        client_secret: '${GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2"}' # docker run --rm authelia/authelia:latest authelia crypto hash generate pbkdf2 --variant sha512 --random --random.length 72 --random.charset rfc3986
+        client_secret: '${GRAFANA_OAUTH_CLIENT_SECRET_HASHED_PBKDF2}' # docker run --rm authelia/authelia:latest authelia crypto hash generate pbkdf2 --variant sha512 --random --random.length 72 --random.charset rfc3986
         public: false
         authorization_policy: 'one_factor'
         require_pkce: true
