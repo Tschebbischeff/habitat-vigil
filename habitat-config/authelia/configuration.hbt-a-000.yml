@@ -1,3 +1,9 @@
+access_control:
+  rules:
+    - domain: 'grafana.{{ env "APP_HOST" }}'
+      subject: 'group:grafana_users'
+      policy: one_factor
+
 identity_providers:
   oidc: # https://www.authelia.com/integration/openid-connect/frequently-asked-questions/#how-do-i-generate-a-client-identifier-or-client-secret
     claims_policies:
