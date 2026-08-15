@@ -26,7 +26,8 @@ You can check out all officially available modules [here](https://github.com/Tsc
  Recording and visualization of all device metrics in pre-configured Grafana Dashboards
 
 ### Planned
- - *(None)*
+
+![No Features Planned](https://img.shields.io/badge/_-No_Planned_Features-green?style=flat)
 
 ## Getting Started
 
