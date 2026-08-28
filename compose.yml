@@ -7,7 +7,7 @@ networks:
     ipam:
       config:
         - subnet: "${APP_NETWORK_POOL}"
-  socket-proxy-vigil:
+  vigil-socket-proxy:
     internal: true
 
 volumes:
@@ -150,7 +150,7 @@ services:
       - /etc/os-release:/hostfs/etc/os-release:ro
     networks:
       internal:
-      socket-proxy:
+      vigil-socket-proxy:
     healthcheck:
       test: [ "CMD", "wget", "--spider", "-q", "http://127.0.0.1:8080/health" ]
       interval: 30s
@@ -180,7 +180,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      socket-proxy:
+      vigil-socket-proxy:
     healthcheck:
       test: [ "CMD", "nc", "-z", "127.0.0.1", "2375" ]
       interval: 5s
