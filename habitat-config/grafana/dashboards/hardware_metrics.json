@@ -5,24 +5,24 @@
     "name": "hardware-metrics",
     "namespace": "default",
     "uid": "9da5fe0a-fad3-451e-8b37-0e398675601c",
-    "resourceVersion": "1778678026882003",
-    "generation": 4,
+    "resourceVersion": "1788030695563987",
+    "generation": 5,
     "creationTimestamp": "2026-05-06T00:50:10Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "2688993405308928"
     },
     "annotations": {
       "grafana.app/createdBy": "access-policy:service",
-      "grafana.app/folder": "",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerAllowsEdits": "true",
       "grafana.app/managerId": "dashboards",
-      "grafana.app/saved-from-ui": "Grafana v13.0.1+security-01 (9bbe672d)",
-      "grafana.app/sourceChecksum": "cae1f7a6c8bb75efc5824e3ddbc090d0",
+      "grafana.app/message": "Sets decimals for docker memory graphs to 2 from 0",
+      "grafana.app/saved-from-ui": "Grafana v13.2.0 (f681b1359f)",
+      "grafana.app/sourceChecksum": "efe72a0721d6c5ede3cc0aae643b11e2",
       "grafana.app/sourcePath": "/etc/grafana/provisioning/dashboards/hardware_metrics.json",
-      "grafana.app/sourceTimestamp": "1778677185000",
-      "grafana.app/updatedBy": "user:afl74eg0bj94we",
-      "grafana.app/updatedTimestamp": "2026-05-13T13:13:46Z"
+      "grafana.app/sourceTimestamp": "1778679826000",
+      "grafana.app/updatedBy": "user:afsolt7sz1kaoa",
+      "grafana.app/updatedTimestamp": "2026-08-29T19:11:35Z"
     }
   },
   "spec": {
@@ -151,7 +151,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -455,7 +455,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -477,7 +477,7 @@
               "fieldConfig": {
                 "defaults": {
                   "unit": "bytes",
-                  "decimals": 0,
+                  "decimals": 2,
                   "min": 0,
                   "thresholds": {
                     "mode": "percentage",
@@ -797,7 +797,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -1329,7 +1329,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -1649,7 +1649,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "table",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "cellHeight": "sm",
@@ -2069,7 +2069,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -2314,7 +2314,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -2431,7 +2431,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -2535,7 +2535,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -2913,7 +2913,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -3340,7 +3340,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -3873,7 +3873,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -4195,7 +4195,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -4397,7 +4397,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -4420,7 +4420,7 @@
                 "defaults": {
                   "displayName": "Used",
                   "unit": "bytes",
-                  "decimals": 0,
+                  "decimals": 2,
                   "min": 0,
                   "thresholds": {
                     "mode": "percentage",
@@ -4572,7 +4572,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -4689,7 +4689,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -4800,7 +4800,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -5057,7 +5057,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -5422,7 +5422,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
@@ -5794,7 +5794,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.1+security-01",
+            "version": "13.2.0",
             "spec": {
               "options": {
                 "annotations": {
