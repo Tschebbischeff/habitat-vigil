@@ -93,6 +93,7 @@ services:
       GF_AUTH_GENERIC_OAUTH_SIGNOUT_REDIRECT_URL: "https://authelia.${APP_HOST}/logout?rd=https%3A%2F%2Fgrafana.${APP_HOST}%2F"
       GF_PROVISIONING_INFLUXDB_TOKEN__FILE: "/run/secrets/INFLUXDB_ADMIN_TOKEN"
       GF_NEWS_NEWS_FEED_ENABLED: "false"
+      GOGC: "50"
     secrets:
       - GRAFANA_OAUTH_CLIENT_ID
       - GRAFANA_OAUTH_CLIENT_SECRET
