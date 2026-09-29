@@ -66,6 +66,7 @@ services:
       - path: ${ENV_DIR}/grafana.env
         required: false
     environment:
+      GF_LOG_LEVEL: "debug"
       GF_SERVER_ROOT_URL: "https://grafana.${APP_HOST}"
       GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
       GF_SECURITY_COOKIE_SECURE: "true"
