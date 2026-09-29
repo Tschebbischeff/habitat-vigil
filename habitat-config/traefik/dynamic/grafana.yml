@@ -14,7 +14,7 @@ http:
       service: svc_grafana-3000
       entryPoints: ["websecure"]
       middlewares:
-        - "cors-policy"
+        # - "cors-policy"
         - "auth-proxy"
       tls:
         certResolver: porkbun-api
