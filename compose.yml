@@ -67,7 +67,7 @@ services:
         required: false
     environment:
       GF_LOG_LEVEL: "debug"
-      GF_LOG_FILTERS: "security:debug,http.server:debug"
+      GF_LOG_FILTERS: "context:debug,security:debug,auth:debug"
       GF_SERVER_ROOT_URL: "https://grafana.${APP_HOST}"
       GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
       GF_SECURITY_COOKIE_SECURE: "true"
