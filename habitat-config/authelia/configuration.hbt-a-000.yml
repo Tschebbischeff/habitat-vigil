@@ -1,6 +1,6 @@
 access_control:
   rules:
-    - domain: 'grafana.{{ env "APP_HOST" }}'
+    - domain: '*.grafana.{{ env "APP_HOST" }}'
       subject: 'group:grafana_users'
       policy: one_factor
 
