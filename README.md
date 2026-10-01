@@ -102,13 +102,11 @@ SECRETS_DIR="/run/secrets"
 > [!TIP]
 > Some environment variables are used commonly throughout all modules, you can check the list [here](https://github.com/Tschebbischeff/habitat#environment-variables-for-modules).
 
-*This module does not require any additional environment variables.*
-
-<!--
 | Name | Description | Example | Default |
 | :-- | :-- | :-- | :-- |
-| `EXAMPLE` | An example description. | `some-value` | *Empty* |
--->
+| `GRAFANA_VERSION` | Tag for the [Grafana docker image](https://hub.docker.com/_/telegraf). | `nightly` | `latest` |
+| `TELEGRAF_VERSION` | Tag for the [Telegraf docker image](https://hub.docker.com/_/telegraf). | `alpine` | `latest` |
+| `DOCKER_SOCKET_PROXY_VERSION` | Tag for the [Docker Socket Proxy docker image](https://github.com/tecnativa/docker-socket-proxy/pkgs/container/docker-socket-proxy). | `nightly` | `latest` |
 
 ### Secrets
 

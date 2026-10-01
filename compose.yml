@@ -53,7 +53,7 @@ services:
       - telegraf-config:/habitat-config/target/telegraf
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:${GRAFANA_VERSION:?}
     container_name: ${APP_NAME_HOST}_grafana
     restart: unless-stopped
     expose:
@@ -122,6 +122,8 @@ services:
   telegraf:
     build:
       context: ./telegraf
+      args:
+        TELEGRAF_VERSION: "${TELEGRAF_VERSION:?}"
     container_name: ${APP_NAME_HOST}_telegraf
     restart: unless-stopped
     user: "root"
@@ -168,7 +170,7 @@ services:
         condition: service_completed_successfully
 
   socket-proxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:master
+    image: ghcr.io/tecnativa/docker-socket-proxy:${DOCKER_SOCKET_PROXY_VERSION:?}
     container_name: ${APP_NAME_HOST}_socket-proxy
     restart: unless-stopped
     user: "root"
