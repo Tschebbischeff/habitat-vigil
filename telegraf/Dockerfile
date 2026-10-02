@@ -1,5 +1,5 @@
 ARG TELEGRAF_VERSION
-FROM telegraf:${TELEGRAF_VERSION}
+FROM telegraf:${TELEGRAF_VERSION:?}
 
 COPY ./entrypoint-hook.sh /entrypoint-hook.sh
 RUN chmod +x /entrypoint-hook.sh
